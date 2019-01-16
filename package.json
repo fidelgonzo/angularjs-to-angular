@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "components": "node src/index.js -c 'tests/data/**/*component.{js,ts}'",
-    "templates": "node src/index.js -t 'tests/data/**/*.tpl.html'",
+    "controller": "node src/index.js -c 'tests/data/**/*Controller.{js,ts}'",
+    "directive": "node src/index.js -c 'tests/data/**/*Directive.{js,ts}'",
+    "templates": "node src/index.js -t 'tests/data/**/*.html'",
     "services": "node src/index.js -s 'tests/data/**/!(*routes|*module|*component|*spec).{js,ts}'",
     "serviceSpecs": "node src/index.js --serviceSpecs 'tests/data/**/*{service,model}.{js,ts}'",
     "test": "ava"
@@ -29,6 +31,7 @@
     "cheerio": "^1.0.0-rc.1",
     "glob": "^7.1.2",
     "handlebars": "^4.0.10",
+    "lodash": "^4.1.0",
     "lodash.sortby": "^4.7.0",
     "lodash.uniq": "^4.5.0",
     "lodash.uniqueid": "^4.0.1",

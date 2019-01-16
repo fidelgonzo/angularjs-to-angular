@@ -62,6 +62,25 @@ const replacements = [
     [/\$element: any(,|\))/g, '$element: ElementRef$1'],
 
     [/Array<(\w+)>/g, '$1[]'],
+
+    [/static \$name(.*)/g,''],
+    [/this.stateService./g,'this.stateService.get().'],
+    [/this.\$rootScope./g,'this.legacyRootScopeService.get().'],
+    [/this.\$scope\.(\w*) =/g,'$1 ='],
+    [/this.\$scope./g,'this.'],
+    [/\$scope./g,''],
+    [/this.\$root./g,'this.legacyRootScopeService.get().'],
+    [/this.\$on/g,'this.legacyRootScopeService.get().$on'],
+    [/this.\$watch/g,'//TODO\n $watch'],
+    [/this.\$broadcast/g,'//TODO\n $broadcast'],
+    [/this.\$state/g,'this.legacyRootScopeService.get().$state'],
+    [/.\$valid/g,'.valid'],
+    [/.\$setDirty\(\)/g,'.markAsDirty()'],
+    [/(.*.\$setSubmitted\(\))/g,'//$1'],
+
+    [/\$http: angular.IHttpService/g,'http: HttpClient'],
+
+
 ];
 
 module.exports = function(results) {

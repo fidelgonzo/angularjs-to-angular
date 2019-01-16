@@ -32,7 +32,7 @@ module.exports = function (template) {
     ngShow.each(function () { // Do not use ()=>
         const val = $(this).attr('ng-show');
         $(this).removeAttr('ng-show');
-        $(this).attr('[hidden]', `!${val}`);
+        $(this).attr('[hidden]', `!(${val})`);
     });
 
     // in Angular2, structural directives cannot live on the same element, so *ngIf and *ngRepeat can't be on the same element.
@@ -184,6 +184,42 @@ module.exports = function (template) {
 
     // Replace ng-view with router-outlet
     result = result.replace(/ng-view/g, 'router-outlet');
+
+    result = result.replace(/ng-mousemove/g, '(mousemove)');
+    result = result.replace(/\$root.model/g, 'rootModel');
+    result = result.replace(/\$root.\$state/g, 'rootState');
+
+    // Ts-Icon stuff
+    result = result.replace(/icon-name/g, 'name');
+    result = result.replace(/icon-width/g, 'width');
+    result = result.replace(/icon-height/g, 'height');
+    result = result.replace(/icon-class/g, 'iconclass');
+    result = result.replace(/icon-color/g, 'color');
+    result = result.replace(/close-icon/g, 'close');
+
+    // Special Attributes
+    result = result.replace(/data-unique-id="(\w*)"/g, '[attr.data-unique-id]="$1"');
+    result = result.replace(/aria-hidden="{{(.*)}}"/g, '[attr.aria-hidden]="$1"');
+    result = result.replace(/aria-hidden="(\w*)"/g, '[attr.aria-hidden]="$1"');
+    result = result.replace(/aria-([a-z]*)="{{(\w*\(\))}}"/g, '[attr.aria-$1]="$2"');
+    result = result.replace(/aria-([a-z]*)="{{(.*)}}"/g, '[attr.aria-$1]="$2"');
+    result = result.replace(/aria-label="(\w+( +\w+)*)"/g, '[attr.aria-label]="\'$1\'"');
+    result = result.replace(/ts-acc-tab-index="/g, '[attr.ts-acc-tab-index]="');
+
+    //i18next
+    result = result.replace(/ ng-i18next="([a-zA-Z:\[\]\-_]*)" (.*)">/g, ' $2">{{\'$1\' | i18next}}');
+    result = result.replace(/ng-i18next="(.*)">/g, '>{{\'$1\' | i18next}}');
+    result = result.replace(/ng-i18next>([a-zA-Z:]*)/g, '>{{\'$1\' | i18next}}');
+
+
+    //Cleanup
+    result = result.replace(/'{{/g,'');
+    result = result.replace(/}}'/g,'');
+
+    //Pipes
+    result = result.replace(/niceHeaderDate/g,'headerDate');
+    result = result.replace(/ts-calendar/g,'calendar');
+
 
     result = pretty.html(result, {
         unformatted: ['code', 'pre', 'em', 'strong'],

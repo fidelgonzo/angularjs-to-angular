@@ -7,8 +7,11 @@ module.exports = function (ast) {
     let bindingsProperty;
 
     const constructor = componentClass.members.find(x => x.kind === kind.Constructor);
+
+    // console.log(constructor);
+
     if (constructor) {
-        bindingsProperty = constructor.body.statements.find(x => x.expression && x.expression.left && x.expression.left.name.text === 'bindings');
+        bindingsProperty = constructor.body.statements.find(x => x.expression && x.expression.left && x.expression.left.name && x.expression.left.name.text === 'bindings');
     }
 
     if (!bindingsProperty) {

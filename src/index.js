@@ -37,7 +37,7 @@ if (argv.services) {
 }
 
 /* Process Non Component Spec Files */
-if(argv.serviceSpecs) {
+if (argv.serviceSpecs) {
     const globPath = path.join(process.cwd(), argv.serviceSpecs);
     processServiceSpecs(globPath);
     process.exit(0);
@@ -55,6 +55,12 @@ process.exit(0);
 
 function processComponents(globPath) {
     const tool = require('./tools/process-components');
+    console.log('glob:'+globPath);
+    // glob.sync('**/*.js', {},function (err, forFiles) {
+    //     console.log(err);
+    //     console.log(forFiles);
+    // });
+
     const files = glob.sync(globPath);
     tool(files);
 }
