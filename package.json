@@ -7,7 +7,7 @@
     "components": "node src/index.js -c 'tests/data/**/*component.{js,ts}'",
     "controller": "node src/index.js -c 'tests/data/**/*Controller.{js,ts}'",
     "directive": "node src/index.js -c 'tests/data/**/*Directive.{js,ts}'",
-    "templates": "node src/index.js -t 'tests/data/**/*.html'",
+    "templates": "node src/index.js -t 'tests/data/**/*.html' -c='tests/data/**/*.component.ts'",
     "services": "node src/index.js -s 'tests/data/**/!(*routes|*module|*component|*spec).{js,ts}'",
     "serviceSpecs": "node src/index.js --serviceSpecs 'tests/data/**/*{service,model}.{js,ts}'",
     "test": "ava"
